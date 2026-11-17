@@ -1,0 +1,35 @@
+
+
+../util/mkexp/mkexp NAME.config
+experiments/NAME/scripts
+sbatch NAME.run_start
+
+cdo -f nc -t echam6 yearmean -fldmean -mergetime NAME_echam6_BOT_mm_18??.grb NAME_echam6_BOT_annual_global_mean.nc
+cdo -f nc -t echam6 yearmean -mergetime NAME_echam6_BOT_mm_18??.grb NAME_echam6_BOT_annual_spatial_mean.nc
+
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/NAME/outdata/echam6/NAME_echam6_BOT_annual_global_mean.nc data/
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/NAME/outdata/echam6/NAME_echam6_BOT_annual_spatial_mean.nc data/
+
+
+
+
+
+
+
+
+
+# DO ALL 
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/60-sun/outdata/echam6/60-sun_echam6_BOT_annual_global_mean.nc data/
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/60-sun/outdata/echam6/60-sun_echam6_BOT_annual_spatial_mean.nc data/
+
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/70-sun/outdata/echam6/70-sun_echam6_BOT_annual_global_mean.nc data/
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/70-sun/outdata/echam6/70-sun_echam6_BOT_annual_spatial_mean.nc data/
+
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/80-sun/outdata/echam6/80-sun_echam6_BOT_annual_global_mean.nc data/
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/80-sun/outdata/echam6/80-sun_echam6_BOT_annual_spatial_mean.nc data/
+
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/90-sun/outdata/echam6/90-sun_echam6_BOT_annual_global_mean.nc data/
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/90-sun/outdata/echam6/90-sun_echam6_BOT_annual_spatial_mean.nc data/
+
+
+

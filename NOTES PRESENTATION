@@ -1,0 +1,36 @@
+
+Structure
+- Introduction, Method, Result, Discussion, Conclusion
+- Figures
+- Short oral presentation
+
+
+Three main ways to modify the model, keep track of you changes! 
+- Namelist (as previous lab)
+    * No recompiling needed
+- Source code (fotran)
+    * Chnage f.90
+    * Have to: make, make install
+    * Comment out old code, do not delete
+- Change input (via NCL)
+    * Requires NetCDF manipulation via Ncar Command Language
+    * Make a copy of input file and change that
+    * Do not chnage with python, use NCL
+
+
+Variables are found under
+- mpiesm-1.2.01p1-misu/src/echam/src/echam
+- mpiesm-1.2.01p1-misu/src/echam/src/src_jsbach3
+- mpiesm-1.2.01p1-misu/src/mpiom/src
+- mpiesm-1.2.01p1-misu/src/mpiom/src_hamocc
+
+- Find them using:  grep word *.extension
+                    grep -E ‘word1|word2’ *.extension
+
+
+Three ideas: 
+    1. Turn of AMOC
+    2. Turn of ice in polar regions
+    3. Increase upward wave propagation. 
+
+
