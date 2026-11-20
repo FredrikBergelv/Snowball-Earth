@@ -33,3 +33,16 @@ scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/90-sun
 
 
 
+
+
+cdo -f nc -t echam6 yearmean -fldmean -mergetime 90-sun_echam6_BOT_mm_18??.grb 90-sun_echam6_BOT_annual_global_mean.nc
+cdo -f nc -t echam6 yearmean -mergetime 90-sun_echam6_BOT_mm_18??.grb 90-sun_echam6_BOT_annual_spatial_mean.nc
+
+cdo -f nc -t echam6 yearmean -fldmean -mergetime 80-sun_echam6_BOT_mm_18??.grb 80-sun_echam6_BOT_annual_global_mean.nc
+cdo -f nc -t echam6 yearmean -mergetime 80-sun_echam6_BOT_mm_18??.grb 80-sun_echam6_BOT_annual_spatial_mean.nc
+
+cdo -f nc -t echam6 yearmean -fldmean -mergetime 70-sun_echam6_BOT_mm_18??.grb 70-sun_echam6_BOT_annual_global_mean.nc
+cdo -f nc -t echam6 yearmean -mergetime 70-sun_echam6_BOT_mm_18??.grb 70-sun_echam6_BOT_annual_spatial_mean.nc
+
+cdo -f nc -t echam6 yearmean -fldmean -mergetime 60-sun_echam6_BOT_mm_18??.grb 60-sun_echam6_BOT_annual_global_mean.nc
+cdo -f nc -t echam6 yearmean -mergetime 60-sun_echam6_BOT_mm_18??.grb 60-sun_echam6_BOT_annual_spatial_mean.nc

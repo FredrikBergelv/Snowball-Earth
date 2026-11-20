@@ -1,4 +1,4 @@
-
+################ SESSION 1: ################
 Structure
 - Introduction, Method, Result, Discussion, Conclusion
 - Figures
@@ -32,5 +32,50 @@ Three ideas:
     1. Turn of AMOC
     2. Turn of ice in polar regions
     3. Increase upward wave propagation. 
+
+
+################ SESSION 2: ################
+
+Spin-up:
+- we will not reach stabe state due to lack of computation
+- BRANCHES -> show how you branch of from pi-control
+
+
+Restart files: 
+- All runs store states to start from
+  cd experiments/piControl-CR-course/restart/echam6
+- Go to the run directory and open a new config file
+- Add -> 
+
+
+EXP_TYPE = piControl-CR
+FINAL_DATE = 1859-12-31
+PARENT_EXP_ID = name-of-the-experiment
+PARENT_ORIG_DATE = 18511231
+PARENT_DIR = /path/to/the/experiment/restart
+
+
+NCL:
+- Modify the input and restart files which are .nc
+
+touch editor.ncl <- create the file 
+ncl editor.ncl <- Note! you will change the original
+
+    #Example 1 - scaling a variable
+    begin
+    f=addfile("strat_aerosol_sw_T31_1882.nc", "w")
+    f->aod = f-> aod*10
+    end
+
+    #Example 2 - new value for variable
+    begin
+    n=485
+    i=3
+    do while(i.le.n)
+    f->CO2(i,0,0) = 284.32 * 0.99^(i-2)
+    i = i+1
+    end do
+    end
+
 
 
