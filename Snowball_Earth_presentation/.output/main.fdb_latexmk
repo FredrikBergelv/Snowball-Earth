@@ -1,17 +1,17 @@
 # Fdb version 4
-["bibtex .output/main"] 1795180778.48303 ".output/main.aux" ".output/main.bbl" ".output/main" 1795180781.13392 0
-  "./Snowball-Earth.bib" 1795180124.08558 3466 0869439d7c2ffdc08f15ed4d12d33b70 ""
-  ".output/main.aux" 1795180780.55313 1843 b0ea3236d1d5393a83c1c1fc53e91718 "pdflatex"
+["bibtex .output/main"] 1795442161.71137 ".output/main.aux" ".output/main.bbl" ".output/main" 1795442161.85361 0
+  "./Snowball-Earth.bib" 1795442161.47464 6175 376dfc0b121a45dc2c99b30137b0dbae ""
+  ".output/main.aux" 1795425334.23369 1843 b0ea3236d1d5393a83c1c1fc53e91718 "pdflatex"
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
   (generated)
   ".output/main.bbl"
   ".output/main.blg"
   (rewritten before read)
-["pdflatex"] 1795180778.71602 "/home/fredrik/Documents/Master in Atmospheric Sciences Oceanography and Climate Physics Stockholm/Global Climate System (MO7003)/Snowball-Earth/Snowball_Earth_presentation/main.tex" ".output/main.pdf" "main" 1795180781.13435 0
-  ".output/main.aux" 1795180780.55313 1843 b0ea3236d1d5393a83c1c1fc53e91718 "pdflatex"
-  ".output/main.bbl" 1795180778.7001 411 8342e193fca5c1cfe55f14a111419066 "bibtex .output/main"
-  ".output/main.nav" 1795180780.55413 1045 17583df79bb01f414e73b420b4d47b8a "pdflatex"
-  ".output/main.out" 1795180780.55413 259 82b2b0a2a5c437f09ad59511393e3bb1 "pdflatex"
+["pdflatex"] 1795425332.21425 "/home/fredrik/Documents/Master in Atmospheric Sciences Oceanography and Climate Physics Stockholm/Global Climate System (MO7003)/Snowball-Earth/Snowball_Earth_presentation/main.tex" ".output/main.pdf" "main" 1795442161.85367 0
+  ".output/main.aux" 1795425334.23369 1843 b0ea3236d1d5393a83c1c1fc53e91718 "pdflatex"
+  ".output/main.bbl" 1795442161.83064 411 8342e193fca5c1cfe55f14a111419066 "bibtex .output/main"
+  ".output/main.nav" 1795425334.23569 1045 17583df79bb01f414e73b420b4d47b8a "pdflatex"
+  ".output/main.out" 1795425334.23569 259 82b2b0a2a5c437f09ad59511393e3bb1 "pdflatex"
   "/etc/texmf/web2c/texmf.cnf" 1732548902.53758 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/fredrik/Documents/Master in Atmospheric Sciences Oceanography and Climate Physics Stockholm/Global Climate System (MO7003)/Snowball-Earth/Snowball_Earth_presentation/main.tex" 1795180154.71393 367 73fe6d2910afe05d4ebb074ef8f2fc08 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -200,7 +200,7 @@
   "Other/Preamble.tex" 1795178439.14991 162 2f0fb5e1afbe8eee5260e2782c04efcf ""
   "Other/Title.tex" 1795178439.15091 1416 da3a397ca6a793133295dde88aba05c2 ""
   "main.tex" 1795180154.71393 367 73fe6d2910afe05d4ebb074ef8f2fc08 ""
-  "slides.tex" 1795180775.49004 562 18e4ff14abae190e725e61dd83a331c1 ""
+  "slides.tex" 1795425331.82265 587 513b6c9b8531e3f30dd3d51308e6ce49 ""
   (generated)
   ".output/main.aux"
   ".output/main.log"

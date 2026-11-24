@@ -15,34 +15,30 @@ scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/NAME/o
 
 
 
+#######################
+
+cdo -f nc -t echam6 yearmean -fldmean -mergetime ~/mpiesm-1.2.01p1-misu/experiments/sbe_ocean_temp_and_ice/outdata/echam6/sbe_ocean_temp_and_ice_echam6_BOT_mm_18??.grb ~/mpiesm-1.2.01p1-misu/experiments/sbe_ocean_temp_and_ice/outdata/echam6/sbe_ocean_temp_and_ice_echam6_BOT_annual_global_mean.nc
+cdo -f nc -t echam6 yearmean -mergetime ~/mpiesm-1.2.01p1-misu/experiments/sbe_ocean_temp_and_ice/outdata/echam6/sbe_ocean_temp_and_ice_echam6_BOT_mm_18??.grb ~/mpiesm-1.2.01p1-misu/experiments/sbe_ocean_temp_and_ice/outdata/echam6/sbe_ocean_temp_and_ice_echam6_BOT_annual_spatial_mean.nc
+
+cdo -f nc -t echam6 yearmean -fldmean -mergetime ~/mpiesm-1.2.01p1-misu/experiments/sbe_ocean_temp/outdata/echam6/sbe_ocean_temp_echam6_BOT_mm_18??.grb ~/mpiesm-1.2.01p1-misu/experiments/sbe_ocean_temp/outdata/echam6/sbe_ocean_temp_echam6_BOT_annual_global_mean.nc
+cdo -f nc -t echam6 yearmean -mergetime ~/mpiesm-1.2.01p1-misu/experiments/sbe_ocean_temp/outdata/echam6/sbe_ocean_temp_echam6_BOT_mm_18??.grb ~/mpiesm-1.2.01p1-misu/experiments/sbe_ocean_temp/outdata/echam6/sbe_ocean_temp_echam6_BOT_annual_spatial_mean.nc
+
+cdo -f nc -t echam6 yearmean -fldmean -mergetime ~/mpiesm-1.2.01p1-misu/experiments/sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow/outdata/echam6/sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow_echam6_BOT_mm_18??.grb ~/mpiesm-1.2.01p1-misu/experiments/sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow/outdata/echam6/sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow_echam6_BOT_annual_global_mean.nc
+cdo -f nc -t echam6 yearmean -mergetime ~/mpiesm-1.2.01p1-misu/experiments/sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow/outdata/echam6/sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow_echam6_BOT_mm_18??.grb ~/mpiesm-1.2.01p1-misu/experiments/sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow/outdata/echam6/sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow_echam6_BOT_annual_spatial_mean.nc
 
 
 
-# DO ALL 
-scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/60-sun/outdata/echam6/60-sun_echam6_BOT_annual_global_mean.nc data/
-scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/60-sun/outdata/echam6/60-sun_echam6_BOT_annual_spatial_mean.nc data/
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow/outdata/echam6/sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow_echam6_BOT_annual_global_mean.nc data/
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow/outdata/echam6/sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow_echam6_BOT_annual_spatial_mean.nc data/
 
-scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/70-sun/outdata/echam6/70-sun_echam6_BOT_annual_global_mean.nc data/
-scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/70-sun/outdata/echam6/70-sun_echam6_BOT_annual_spatial_mean.nc data/
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/sbe_ocean_temp/outdata/echam6/sbe_ocean_temp_echam6_BOT_annual_global_mean.nc data/
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/sbe_ocean_temp/outdata/echam6/sbe_ocean_temp_echam6_BOT_annual_spatial_mean.nc data/
 
-scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/80-sun/outdata/echam6/80-sun_echam6_BOT_annual_global_mean.nc data/
-scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/80-sun/outdata/echam6/80-sun_echam6_BOT_annual_spatial_mean.nc data/
-
-scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/90-sun/outdata/echam6/90-sun_echam6_BOT_annual_global_mean.nc data/
-scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/90-sun/outdata/echam6/90-sun_echam6_BOT_annual_spatial_mean.nc data/
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/sbe_ocean_temp_and_ice/outdata/echam6/sbe_ocean_temp_and_ice_echam6_BOT_annual_global_mean.nc data/
+scp fredrik@193.10.159.193:/home/fredrik/mpiesm-1.2.01p1-misu/experiments/sbe_ocean_temp_and_ice/outdata/echam6/sbe_ocean_temp_and_ice_echam6_BOT_annual_spatial_mean.nc data/
 
 
 
 
 
-cdo -f nc -t echam6 yearmean -fldmean -mergetime 90-sun_echam6_BOT_mm_18??.grb 90-sun_echam6_BOT_annual_global_mean.nc
-cdo -f nc -t echam6 yearmean -mergetime 90-sun_echam6_BOT_mm_18??.grb 90-sun_echam6_BOT_annual_spatial_mean.nc
-
-cdo -f nc -t echam6 yearmean -fldmean -mergetime 80-sun_echam6_BOT_mm_18??.grb 80-sun_echam6_BOT_annual_global_mean.nc
-cdo -f nc -t echam6 yearmean -mergetime 80-sun_echam6_BOT_mm_18??.grb 80-sun_echam6_BOT_annual_spatial_mean.nc
-
-cdo -f nc -t echam6 yearmean -fldmean -mergetime 70-sun_echam6_BOT_mm_18??.grb 70-sun_echam6_BOT_annual_global_mean.nc
-cdo -f nc -t echam6 yearmean -mergetime 70-sun_echam6_BOT_mm_18??.grb 70-sun_echam6_BOT_annual_spatial_mean.nc
-
-cdo -f nc -t echam6 yearmean -fldmean -mergetime 60-sun_echam6_BOT_mm_18??.grb 60-sun_echam6_BOT_annual_global_mean.nc
-cdo -f nc -t echam6 yearmean -mergetime 60-sun_echam6_BOT_mm_18??.grb 60-sun_echam6_BOT_annual_spatial_mean.nc
+sbe_ocean_temp_and_ice

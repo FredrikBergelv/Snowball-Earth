@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.11.25)  20 NOV 2026 14:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.11.25)  23 NOV 2026 10:15
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -752,15 +752,15 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 82B2B0A2A5C437F09AD59511393E3BB1;259.
  ) 
 Here is how much of TeX's memory you used:
- 21975 strings out of 474222
- 421979 string characters out of 5748732
+ 21976 strings out of 474222
+ 421996 string characters out of 5748732
  1932975 words of memory out of 5000000
- 43756 multiletter control sequences out of 15000+600000
+ 43757 multiletter control sequences out of 15000+600000
  561539 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,123p,572b,569s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on .output/main.pdf (4 pages, 117915 bytes).
+Output written on .output/main.pdf (4 pages, 118030 bytes).
 PDF statistics:
  197 PDF objects out of 1000 (max. 8388607)
  167 compressed objects within 2 object streams

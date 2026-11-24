@@ -47,6 +47,21 @@ for file in glob.glob(os.path.join("data/*.nc")):
     elif match_spatial:
         spatial_files[int(match_spatial.group(1))] = file
 
+global_recovery_files = {}
+spatial_recovery_files = {}
+
+for file in glob.glob(os.path.join("data/*.nc")):
+    filename = os.path.basename(file)
+
+    match_global = re.match(r"recovery-(\d+)-sun_echam6_BOT_annual_global_mean\.nc$", filename)
+    match_spatial = re.match(r"recovery-(\d+)-sun_echam6_BOT_annual_spatial_mean\.nc$", filename)
+
+    if match_global:
+        global_recovery_files[int(match_global.group(1))] = file
+
+    elif match_spatial:
+        spatial_recovery_files[int(match_spatial.group(1))] = file
+
 solar_values = sorted(set(global_files) & set(spatial_files))
 
 if not solar_values:
@@ -62,10 +77,14 @@ solar_values = solar_values[::-1]
 
 global_datasets = {}
 spatial_datasets = {}
+global_recovery_datasets = {}
+spatial_recovery_datasets = {}
 
 for solar in solar_values:
     global_datasets[solar] = xr.open_dataset(global_files[solar])
     spatial_datasets[solar] = xr.open_dataset(spatial_files[solar])
+    global_recovery_datasets[solar] = xr.open_dataset(global_recovery_files[solar])
+    spatial_recovery_datasets[solar] = xr.open_dataset(spatial_recovery_files[solar])
 
 # --------------------------------------------------
 # Extract variables
@@ -76,17 +95,30 @@ ice_maps = {}
 global_temperatures = {}
 simulation_years = {}
 
+temperature_maps_recovery = {}
+ice_maps_recovery  = {}
+global_temperatures_recovery  = {}
+simulation_years_recovery  = {}
+
+
 for solar in solar_values:
 
     ds_global = global_datasets[solar]
     ds_spatial = spatial_datasets[solar]
 
+    ds_global_recovery = global_recovery_datasets[solar]
+    ds_spatial_recovery = spatial_recovery_datasets[solar]
+
     temperature_maps[solar] = ds_spatial["tsurf"].isel(time=-1) - 273.15
     ice_maps[solar] = ds_spatial["seaice"].isel(time=-1)
-
     global_temperatures[solar] = (ds_global["tsurf"] - 273.15).squeeze()
-
     simulation_years[solar] = int((ds_spatial["time"].values[-1] - ds_spatial["time"].values[0])/ 1e4) + 1
+
+    temperature_maps_recovery[solar] = ds_spatial_recovery["tsurf"].isel(time=-1) - 273.15
+    ice_maps_recovery[solar] = ds_spatial_recovery["seaice"].isel(time=-1)
+    global_temperatures_recovery[solar] = (ds_global_recovery["tsurf"] - 273.15).squeeze()
+    simulation_years_recovery[solar] = int((ds_spatial_recovery["time"].values[-1] - ds_spatial_recovery["time"].values[0])/ 1e4) + 1
+
 
 # --------------------------------------------------
 # Function for map plots
@@ -128,6 +160,7 @@ for solar in solar_values:
         fig.suptitle(title, fontsize=15)
         #plt.tight_layout()
         plt.savefig(output_dir + filename, dpi=300, bbox_inches="tight")
+        print("saved " + filename)
 
         if show_YN:
             plt.show()
@@ -145,6 +178,12 @@ plot_maps(temperature_maps, cmap="RdBu_r",
           bar_title=r"Temperature [$^\circ$C]", 
           filename="temperature_comparison.png")
 
+plot_maps(temperature_maps_recovery, cmap="RdBu_r", 
+          levels=temperature_levels, 
+          title="Surface recovery temperature from different solar forcings", 
+          bar_title=r"Temperature [$^\circ$C]", 
+          filename="recovery_temperature_comparison.png")
+
 # --------------------------------------------------
 # 2. Sea ice maps
 # --------------------------------------------------
@@ -156,6 +195,13 @@ plot_maps(ice_maps,
           bar_title="Sea ice fraction", 
           filename="sea_ice_comparison.png")
 
+plot_maps(ice_maps_recovery, 
+          cmap="Blues", 
+          levels=ice_levels, 
+          title="Sea ice cover recovery from different solar forcings", 
+          bar_title="Sea ice fraction", 
+          filename="recovery_sea_ice_comparison.png")
+
 # --------------------------------------------------
 # 3. Global mean temperature versus time
 # --------------------------------------------------
@@ -165,18 +211,27 @@ ds_control = xr.open_dataset("data/piControl-CR-course_echam6_BOT_20yr_global_me
 control_temperature = (ds_control["tsurf"].squeeze().item() - 273.15)
 
 fig, ax = plt.subplots(figsize=(6, 4))
-ax.axhline(0, color="black", linewidth=0.8)
+ax.axhline(0, color="black", linewidth=0.8, linestyle="--")
 
 for i, solar in enumerate(solar_values):
 
     ds = global_datasets[solar]
     time = ds["time"].values / 1e4
     T_global = global_temperatures[solar]
-    
     T_global = np.insert(T_global, 0, control_temperature, axis=0)
     time = np.insert(time, 0, 1850, axis=0)
+    
+    overlap_year = 1880
 
+    ds_recovery = global_recovery_datasets[solar]
+    time_recovery = ds_recovery["time"].values / 1e4 + 30
+    T_global_recovery = global_temperatures_recovery[solar]
+    T_global_recovery = np.insert(T_global_recovery, 0, T_global.values[overlap_year-1850], axis=0)
+    time_recovery = np.insert(time_recovery, 0, time[overlap_year-1850], axis=0)
+ 
     ax.plot(time, T_global.values, color=f"C{i}", label=f"{solar}%")
+    ax.plot(time_recovery, T_global_recovery.values, color=f"C{i}", linestyle="--" )
+
 
 ax.set_xlabel("Time [yr]")
 ax.set_ylabel(r"Temperature [$^\circ$C]")
@@ -188,29 +243,23 @@ ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 plt.tight_layout()
 plt.savefig(output_dir + "global_temperature_comparison.png", dpi=300)
 
+print("saved global_temperature_comparison.png")
+
 if show_YN:
     plt.show()
 else:
     plt.close(fig)
 
-
 # --------------------------------------------------
-# 4. Gregory plot: Net radiation imbalance vs temperature
+# 4. Gregory plot: Net radiation versus temperature change
 # --------------------------------------------------
 
-# Control reference values
-N_ctrl = (
-    ds_control["trad0"].squeeze().item()
-    + ds_control["srad0"].squeeze().item()
-)
+# Control climate reference values
+N_control = (ds_control["trad0"].squeeze().item()+ ds_control["srad0"].squeeze().item())
 
-T_ctrl = ds_control["tsurf"].squeeze().item()
-
-print(f"\nControl radiation imbalance: {N_ctrl:.2f} W/m²")
+T_control = ds_control["tsurf"].squeeze().item()
 
 fig, ax = plt.subplots(figsize=(7, 5))
-
-gregory_results = {}
 
 for i, solar in enumerate(solar_values):
 
@@ -218,75 +267,46 @@ for i, solar in enumerate(solar_values):
 
     # Net radiation imbalance
     N = (ds["trad0"] + ds["srad0"]).squeeze().values
-    del_N = N - N_ctrl
 
-    # Global mean temperature change
+    # Global mean surface temperature
     T = ds["tsurf"].squeeze().values
-    del_T = T - T_ctrl
 
-    # Remove any invalid values
-    valid = np.isfinite(del_T) & np.isfinite(del_N)
-    del_T = del_T[valid]
-    del_N = del_N[valid]
+    # Changes relative to control climate
+    delta_N = N - N_control
+    delta_T = T - T_control
 
-    # Gregory regression
-    coefficients, covariance = np.polyfit(del_T, del_N, 1, cov=True)
+    # Remove invalid values
+    valid = np.isfinite(delta_T) & np.isfinite(delta_N)
+    delta_T = delta_T[valid]
+    delta_N = delta_N[valid]
 
-    k, m = coefficients
-    sigma_k, sigma_m = np.sqrt(np.diag(covariance))
+    # Linear regression
+    slope, intercept = np.polyfit(delta_T, delta_N, 1)
 
-    # Equilibrium climate sensitivity
-    ECS = -m / k
+    # Regression line
+    T_fit = np.linspace(delta_T.min(), delta_T.max(), 100)
+    N_fit = slope * T_fit + intercept
 
-    sigma_ECS = np.sqrt(
-        (m / k**2)**2 * covariance[0, 0]
-        + (1 / k)**2 * covariance[1, 1]
-        - 2 * m / k**3 * covariance[0, 1]
-    )
+    # Scatter and regression
+    ax.scatter(delta_T, delta_N, color=f"C{i}", label=f"{solar}% solar")
 
-    gregory_results[solar] = (k, m, ECS, sigma_ECS)
+    ax.plot(T_fit, N_fit, color=f"C{i}", linestyle="--")
 
-    print(f"\n{solar}% solar forcing:")
-    print(f"Feedback parameter: {k:.2f} ± {sigma_k:.2f} W/m²/K")
-    print(f"Intercept:          {m:.2f} ± {sigma_m:.2f} W/m²")
-    print(f"ECS:                {ECS:.2f} ± {sigma_ECS:.2f} K")
+ax.axhline(0, color="black", linewidth=0.8, alpha=0.6, linestyle="--")
+ax.axvline(0, color="black", linewidth=0.8, alpha=0.6, linestyle="--")
 
-    # Scatter points
-    ax.scatter(
-        del_T, del_N,
-        color=f"C{i}",
-        label=f"{solar}% solar forcing"
-    )
+ax.set_xlabel(r"Temperature change, $\Delta T$ [K]")
+ax.set_ylabel(r"Net radiation change, $\Delta N$ [W m$^{-2}$]")
+ax.set_title("Gregory plot: Different solar forcings")
 
-    # Linear regression line
-    x_fit = np.linspace(np.min(del_T), np.max(del_T), 200)
-
-    ax.plot(
-        x_fit,
-        k * x_fit + m,
-        color=f"C{i}",
-        linestyle="--",
-        label=f"Linear fit {solar}%"
-    )
-
-ax.set_xlabel(r"Temperature change, $\Delta T$ [K]", fontsize=12)
-ax.set_ylabel(r"Radiation imbalance, $\Delta N$ [W/m$^2$]", fontsize=12)
-ax.set_title("Gregory plot", fontsize=15)
-
-ax.grid(True, linestyle="--", alpha=0.6)
-ax.legend(fontsize=10)
-
-plt.xlim(-40,0)
-plt.ylim(-80,0)
+ax.grid(True, alpha=0.3, linestyle="--")
+ax.legend(title="Solar forcing")
 
 plt.tight_layout()
-plt.savefig(output_dir + "gregory_comparison.png", dpi=300)
+plt.savefig(output_dir + "gregory_comparison.png",
+            dpi=300, bbox_inches="tight")
 
-if show_YN:
-    plt.show()
-else:
-    plt.close(fig)
-
+print("saved gregory_comparison.png")
 
 # --------------------------------------------------
 # Close datasets
