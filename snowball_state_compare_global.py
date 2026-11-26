@@ -16,15 +16,17 @@ from matplotlib.ticker import MaxNLocator
 # --------------------------------------------------
 
 plotdatas = [
-    "sbe_ocean_temp",
+    "sbe_ocean_05_temp",
+    "sbe_ocean_15_temp",
     "sbe_ocean_temp_and_ice",
     "sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow"
 ]
 
 plot_titles = [
-    "MPIOM temperature",
-    "MPIOM temperature & seaice",
-    "MPIOM temp & seaice, ECHAM seaice & snow, JSBACH snow"
+    r"MPIOM -0.5$^\circ$C pot. temp.",
+    r"MPIOM -1.5$^\circ$C pot. temp. ",
+    "MPIOM -1.5$^\circ$C pot. temp. -1.5$^\circ$C & 5m seaice",
+    "MPIOM -1.5$^\circ$C pot. temp. & 5m seaice, ECHAM seaice & snow, JSBACH snow"
 ]
 
 data_dir = "data/"
@@ -67,7 +69,7 @@ ax.set_xlabel("Time [yr]")
 ax.set_ylabel(r"Temperature [$^\circ$C]")
 ax.set_title("Global mean surface temperature", fontsize=13)
 ax.grid(True, alpha=0.3, linestyle="--")
-ax.legend(loc="lower left", fontsize=9)
+ax.legend(loc="lower left", fontsize=8, framealpha=0.3 )
 ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 ax.set_ylim(-55, 1)
 

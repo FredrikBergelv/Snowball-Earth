@@ -12,14 +12,14 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from matplotlib.ticker import MaxNLocator
-
+import cmocean as cmo
 
 # --------------------------------------------------
 # Settings
 # --------------------------------------------------
 
 plotdatas = [
-    "sbe_ocean_temp",
+    "sbe_ocean_15_temp",
     "sbe_ocean_temp_and_ice",
     "sbe_mpiom_temp-ice_echam-ice-snow_jsbach_snow"
 ]
@@ -139,13 +139,16 @@ for i, (plotdata, title) in enumerate(zip(plotdatas, plot_titles)):
 
     seaice = datasets[plotdata]["seaice"]
 
-    im_ice = seaice.plot(ax=ax, transform=ccrs.PlateCarree(), cmap="Blues", levels=ice_levels, vmin=0, vmax=1, add_colorbar=False)
+    im_ice = seaice.plot(ax=ax, transform=ccrs.PlateCarree(), cmap=cmo.cm.ice, levels=ice_levels, vmin=0, vmax=1, zorder=1, add_colorbar=False)
 
     ax.set_global()
-    ax.coastlines(linewidth=0.6)
-    ax.add_feature(cfeature.BORDERS, linewidth=0.3)
+    ax.coastlines(linewidth=0.6, zorder=3)
+    ax.add_feature(cfeature.BORDERS, linewidth=0.3, zorder=3)
+    ax.add_feature(cfeature.LAND, facecolor="lightgrey", edgecolor="none", zorder=2)
 
     ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=False, linewidth=0.4, color="gray", alpha=0.5, linestyle="--")
+
+    year = datasets[plotdata]["year"]
 
     ax.set_title(f"{year:.0f}\n{title}", fontsize=11)
 

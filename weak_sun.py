@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from matplotlib.ticker import MaxNLocator
-import cmocean.cm as cmo
+import cmocean as cmo
 
 
 # --------------------------------------------------
@@ -137,12 +137,17 @@ for solar in solar_values:
         ims = []
         for ax, (solar, variable) in zip(axes, data_dict.items()):
 
-            im = variable.plot(ax=ax, transform=ccrs.PlateCarree(), cmap=cmap, levels=levels, add_colorbar=False)       
+            im = variable.plot(ax=ax, transform=ccrs.PlateCarree(), cmap=cmap, levels=levels, add_colorbar=False, zorder=1)       
             ims.append(im)
 
             ax.set_global()
-            ax.coastlines(linewidth=0.7)
-            ax.add_feature(cfeature.BORDERS, linewidth=0.3)
+
+            if cmap == cmo.cm.ice: 
+                ax.add_feature(cfeature.LAND, facecolor="lightgrey", edgecolor="none", zorder=2)
+
+            ax.coastlines(linewidth=0.7, zorder=3)
+            ax.add_feature(cfeature.BORDERS, linewidth=0.3, zorder=3)
+                
 
             ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=False, linewidth=0.5, color="gray", alpha=0.5, linestyle="--")
 
@@ -176,32 +181,32 @@ plot_maps(temperature_maps, cmap="RdBu_r",
           levels=temperature_levels, 
           title="Surface temperature under different solar forcings", 
           bar_title=r"Temperature [$^\circ$C]", 
-          filename="temperature_comparison.png")
-
+          filename="solarforcing_temperature_comparison.png")
+"""
 plot_maps(temperature_maps_recovery, cmap="RdBu_r", 
           levels=temperature_levels, 
           title="Surface recovery temperature from different solar forcings", 
           bar_title=r"Temperature [$^\circ$C]", 
-          filename="recovery_temperature_comparison.png")
-
+          filename="solarforcing_recovery_temperature_comparison.png")
+"""
 # --------------------------------------------------
 # 2. Sea ice maps
 # --------------------------------------------------
 
 plot_maps(ice_maps, 
-          cmap="Blues", 
+          cmap=cmo.cm.ice, 
           levels=ice_levels, 
           title="Sea ice cover under different solar forcings", 
           bar_title="Sea ice fraction", 
-          filename="sea_ice_comparison.png")
-
+          filename="solarforcing_sea_ice_comparison.png")
+"""
 plot_maps(ice_maps_recovery, 
-          cmap="Blues", 
+          cmap=cmo.cm.ice, 
           levels=ice_levels, 
           title="Sea ice cover recovery from different solar forcings", 
           bar_title="Sea ice fraction", 
-          filename="recovery_sea_ice_comparison.png")
-
+          filename="solarforcing_recovery_sea_ice_comparison.png")
+"""
 # --------------------------------------------------
 # 3. Global mean temperature versus time
 # --------------------------------------------------
@@ -241,7 +246,7 @@ ax.legend(title="Solar forcing")
 ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 
 plt.tight_layout()
-plt.savefig(output_dir + "global_temperature_comparison.png", dpi=300)
+plt.savefig(output_dir + "solarforcing_global_temperature_comparison.png", dpi=300)
 
 print("saved global_temperature_comparison.png")
 
@@ -303,7 +308,7 @@ ax.grid(True, alpha=0.3, linestyle="--")
 ax.legend(title="Solar forcing")
 
 plt.tight_layout()
-plt.savefig(output_dir + "gregory_comparison.png",
+plt.savefig(output_dir + "solarforcing_gregory_comparison.png",
             dpi=300, bbox_inches="tight")
 
 print("saved gregory_comparison.png")
